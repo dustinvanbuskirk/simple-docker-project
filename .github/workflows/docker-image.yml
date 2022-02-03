@@ -23,5 +23,5 @@ jobs:
         image: simple-docker-project
         tags: ${{ github.sha }}
         registry: dustinvanbuskirk
-        username: dev@vanbuskirk.me
+        username: dustinvanbuskirk
         password: ${{ secrets.docker_hub_password }}
