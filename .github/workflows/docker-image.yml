@@ -15,12 +15,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag simple-docker-project:$GITHUB_SHA
+      run: docker build . --file Dockerfile --tag simple-docker-project:${{ github.sha }}
+
     - name: Push To Registry
       uses: redhat-actions/push-to-registry@v2.5.1
       with:
         image: simple-docker-project
-        tags: $GITHUB_SHA
+        tags: ${{ github.sha }}
         registry: quay.io/dustin_codefresh
         username: dev@vanbuskirk.me
-        password: $QUAY_PASSWORD
+        password: ${{ secrets.quay_password }}
