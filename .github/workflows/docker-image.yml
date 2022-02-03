@@ -22,6 +22,6 @@ jobs:
       with:
         image: simple-docker-project
         tags: ${{ github.sha }}
-        registry: quay.io/dustin_codefresh
+        registry: dustinvanbuskirk
         username: dev@vanbuskirk.me
-        password: ${{ secrets.quay_password }}
+        password: ${{ secrets.docker_hub_password }}
