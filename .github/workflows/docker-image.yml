@@ -34,7 +34,7 @@ jobs:
     steps:
       - name: Report Docker Image to CSDP
         run: |
-          if [[ github.event_name == 'pull_request' ]]; then
+          if [[ ${{ github.event_name }} == 'pull_request' ]]; then
             export "GIT_BRANCH=${{ github.head_ref }}"
           else
             export "GIT_BRANCH=${{ github.ref_name }}"
