@@ -58,7 +58,7 @@ jobs:
 
     steps:
       - name: Report JIRA Information to CSDP
-        run: node /usr/src/index.js
+        run: node /app/src/index.js
         working-directory: /app/
         env:
           IMAGE: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
@@ -82,7 +82,7 @@ jobs:
 
     steps:
       - name: Report GitHub Information to CSDP
-        run: node /usr/src/index.js
+        run: node /app/src/index.js
         working-directory: /app/
         env:
           IMAGE_SHA: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
