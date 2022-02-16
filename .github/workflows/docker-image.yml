@@ -25,19 +25,25 @@ jobs:
         registry: dustinvanbuskirk
         username: dustinvanbuskirk
         password: ${{ secrets.docker_hub_password }}
-    - name: Report Image To CSDP
-      uses: docker://quay.io/codefreshplugins/argo-hub-workflows-codefresh-csdp-versions-0.0.6-images-report-image-info:main
-      with:
-        entrypoint: node /usr/src/app/index.js
-      env:
-        IMAGE_URI: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
-        CF_API_KEY: ${{ secrets.csdp_api_key }}
-        GIT_BRANCH: ${{ github.ref.name }}
-        GIT_REVISION: ${{ github.sha }}
-        GIT_COMMIT_MESSAGE: GitHub Actions have been here
-        GIT_COMMIT_URL: ${{ github.server.url }}/${{ github.repository }}/actions/runs/${{ github.run.id }}
-        DOCKER_USERNAME: dustinvanbuskirk
-        DOCKER_PASSWORD: ${{ secrets.docker_hub_password }}
-        WORKFLOW_NAME: ${{ github.workflow }}
-        GIT_SENDER_LOGIN: ${{ github.actor }}
-        CF_HOST: https://g.codefresh.io
+  csdp-reporting:
+  
+    runs-on: ubuntu-latest
+  
+    container:
+      image: quay.io/codefreshplugins/argo-hub-workflows-codefresh-csdp-versions-0.0.6-images-report-image-info:main
+    steps:
+      - name: Log the node version
+        run: node /usr/src/app/index.js
+        working-directory: /usr/src/app
+        env:
+          IMAGE_URI: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
+          CF_API_KEY: ${{ secrets.csdp_api_key }}
+          GIT_BRANCH: ${{ github.ref.name }}
+          GIT_REVISION: ${{ github.sha }}
+          GIT_COMMIT_MESSAGE: GitHub Actions have been here
+          GIT_COMMIT_URL: ${{ github.server.url }}/${{ github.repository }}/actions/runs/${{ github.run.id }}
+          DOCKER_USERNAME: dustinvanbuskirk
+          DOCKER_PASSWORD: ${{ secrets.docker_hub_password }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+          GIT_SENDER_LOGIN: ${{ github.actor }}
+          CF_HOST: https://g.codefresh.io
