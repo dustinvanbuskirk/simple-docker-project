@@ -34,7 +34,7 @@ jobs:
     container:
       image: quay.io/codefreshplugins/argo-hub-workflows-codefresh-csdp-versions-0.0.6-images-report-image-info:main
     steps:
-      - name: Log the node version
+      - name: Report Docker Image to CSDP
         run: node /usr/src/app/index.js
         working-directory: /usr/src/app
         env:
