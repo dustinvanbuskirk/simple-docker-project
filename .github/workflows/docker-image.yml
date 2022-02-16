@@ -25,3 +25,19 @@ jobs:
         registry: dustinvanbuskirk
         username: dustinvanbuskirk
         password: ${{ secrets.docker_hub_password }}
+    - name: Report Image To CSDP
+      uses: addnab/docker-run-action@v3
+      with:
+        image: dustinvanbuskirk/report-image-info:0.0.6
+      env:
+        IMAGE_URI: 'docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}'
+        CF_API_KEY: ${{ secrets.csdp_api_key }}
+        GIT_BRANCH: ${{ github.head.ref }}
+        GIT_REVISION: ${{ github.sha }}
+        GIT_COMMIT_MESSAGE: GitHub Actions have been here
+        GIT_COMMIT_URL: '${{ github.server.url }}/${{ github.repository }}/actions/runs/${{ github.run.id }}'
+        DOCKER_USERNAME: dustinvanbuskirk
+        DOCKER_PASSWORD: ${{ secrets.docker_hub_password }}
+        WORKFLOW_NAME: ${{ github.workflow }}
+        GIT_SENDER_LOGIN: ${{ github.actor }}
+        CF_HOST: 'https://g.codefresh.io'
