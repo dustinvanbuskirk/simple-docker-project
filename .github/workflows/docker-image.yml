@@ -28,14 +28,14 @@ jobs:
     - name: Report Image To CSDP
       uses: docker://quay.io/codefreshplugins/argo-hub-workflows-codefresh-csdp-versions-0.0.6-images-report-image-info:main
       env:
-        IMAGE_URI: 'docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}'
+        IMAGE_URI: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
         CF_API_KEY: ${{ secrets.csdp_api_key }}
         GIT_BRANCH: ${{ github.head.ref }}
         GIT_REVISION: ${{ github.sha }}
         GIT_COMMIT_MESSAGE: GitHub Actions have been here
-        GIT_COMMIT_URL: '${{ github.server.url }}/${{ github.repository }}/actions/runs/${{ github.run.id }}'
+        GIT_COMMIT_URL: ${{ github.server.url }}/${{ github.repository }}/actions/runs/${{ github.run.id }}
         DOCKER_USERNAME: dustinvanbuskirk
         DOCKER_PASSWORD: ${{ secrets.docker_hub_password }}
         WORKFLOW_NAME: ${{ github.workflow }}
         GIT_SENDER_LOGIN: ${{ github.actor }}
-        CF_HOST: 'https://g.codefresh.io'
+        CF_HOST: https://g.codefresh.io
