@@ -64,7 +64,7 @@ jobs:
           IMAGE: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
           CF_API_KEY: ${{ secrets.csdp_api_key }}
           JIRA_PROJECT_PREFIX: SA
-          MESSAGE: ${{ github.ref_name }}
+          MESSAGE: ${{ github.head_ref }}
           JIRA_HOST: codefresh-io.atlassian.net
           JIRA_EMAIL: dustin@codefresh.io
           JIRA_API_TOKEN: ${{ secrets.jira_api_token }}
@@ -88,6 +88,6 @@ jobs:
           IMAGE_SHA: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
           CF_API_KEY: ${{ secrets.csdp_api_key }}
           GITHUB_TOKEN: ${{ github.token }}
-          BRANCH: ${{ github.ref_name }}
+          BRANCH: ${{ github.head_ref }}
           REPO: ${{ github.repository }}
           GIT_SENDER_LOGIN: ${{ github.actor }}
