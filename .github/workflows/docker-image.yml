@@ -26,7 +26,7 @@ jobs:
         username: dustinvanbuskirk
         password: ${{ secrets.docker_hub_password }}
     - name: Report Image To CSDP
-      uses: docker://quay.io/codefreshplugins/argo-hub-workflows-codefresh-csdp-versions-0.0.6-images-report-image-info
+      uses: docker://quay.io/codefreshplugins/argo-hub-workflows-codefresh-csdp-versions-0.0.6-images-report-image-info:main
       env:
         IMAGE_URI: 'docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}'
         CF_API_KEY: ${{ secrets.csdp_api_key }}
