@@ -35,9 +35,9 @@ jobs:
       - name: Report Docker Image to CSDP
         run: |
           if [[ github.event_name == 'pull_request' ]]; then
-            echo "GIT_BRANCH=${{ github.head_ref }}" >> $GITHUB_ENV
+            export "GIT_BRANCH=${{ github.head_ref }}"
           else
-            echo "GIT_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
+            export "GIT_BRANCH=${{ github.ref_name }}"
           fi
           node /usr/src/app/index.js
         working-directory: /usr/src/app
@@ -67,9 +67,9 @@ jobs:
       - name: Report JIRA Information to CSDP
         run: |
           if [[ github.event_name == 'pull_request' ]]; then
-            echo "MESSAGE=${{ github.head_ref }}" >> $GITHUB_ENV
+            export "MESSAGE=${{ github.head_ref }}"
           else
-            echo "MESSAGE=${{ github.ref_name }}" >> $GITHUB_ENV
+            export "MESSAGE=${{ github.ref_name }}"
           fi
           node /app/src/index.js
         working-directory: /app/
