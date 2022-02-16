@@ -28,6 +28,8 @@ jobs:
   csdp-reporting:
   
     runs-on: ubuntu-latest
+    
+    needs: [build]
   
     container:
       image: quay.io/codefreshplugins/argo-hub-workflows-codefresh-csdp-versions-0.0.6-images-report-image-info:main
@@ -38,7 +40,7 @@ jobs:
         env:
           IMAGE_URI: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
           CF_API_KEY: ${{ secrets.csdp_api_key }}
-          GIT_BRANCH: main
+          GIT_BRANCH: ${{ github.ref_name }
           GIT_REVISION: ${{ github.sha }}
           GIT_COMMIT_MESSAGE: GitHub Actions have been here
           GIT_COMMIT_URL: ${{ github.server.url }}/${{ github.repository }}/actions/runs/${{ github.run.id }}
