@@ -26,9 +26,7 @@ jobs:
         username: dustinvanbuskirk
         password: ${{ secrets.docker_hub_password }}
     - name: Report Image To CSDP
-      uses: addnab/docker-run-action@v3
-      with:
-        image: dustinvanbuskirk/report-image-info:0.0.6
+      uses: docker://dustinvanbuskirk/report-image-info:0.0.6
       env:
         IMAGE_URI: 'docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}'
         CF_API_KEY: ${{ secrets.csdp_api_key }}
