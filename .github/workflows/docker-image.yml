@@ -28,7 +28,7 @@ jobs:
     - name: Report Image To CSDP
       uses: docker://quay.io/codefreshplugins/argo-hub-workflows-codefresh-csdp-versions-0.0.6-images-report-image-info:main
       with:
-        entrypoint: node /index.js
+        entrypoint: node /usr/src/app/index.js
       env:
         IMAGE_URI: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
         CF_API_KEY: ${{ secrets.csdp_api_key }}
