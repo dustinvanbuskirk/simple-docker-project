@@ -32,7 +32,13 @@ jobs:
     
     steps:
       - name: Report Docker Image to CSDP
-        run: node /usr/src/app/index.js
+        run: |
+          if [[ github.event_name == 'pull_request' ]]; then
+            echo "GIT_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
+          else
+            echo "GIT_BRANCH=${{ github.head_ref }}" >> $GITHUB_ENV
+          fi
+          node /usr/src/app/index.js
         working-directory: /usr/src/app
         env:
           IMAGE_URI: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
@@ -58,13 +64,18 @@ jobs:
 
     steps:
       - name: Report JIRA Information to CSDP
-        run: node /app/src/index.js
+        run: |
+          if [[ github.event_name == 'pull_request' ]]; then
+            echo "MESSAGE=${{ github.ref_name }}" >> $GITHUB_ENV
+          else
+            echo "MESSAGE=${{ github.head_ref }}" >> $GITHUB_ENV
+          fi
+          node /app/src/index.js
         working-directory: /app/
         env:
           IMAGE: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
           CF_API_KEY: ${{ secrets.csdp_api_key }}
           JIRA_PROJECT_PREFIX: SA
-          MESSAGE: ${{ github.head_ref }}
           JIRA_HOST: codefresh-io.atlassian.net
           JIRA_EMAIL: dustin@codefresh.io
           JIRA_API_TOKEN: ${{ secrets.jira_api_token }}
@@ -74,15 +85,19 @@ jobs:
     runs-on: ubuntu-latest
     
     needs: [build]
-    
-    if: ${{ github.event_name == 'pull_request' }}
   
     container:
       image: quay.io/codefreshplugins/argo-hub-workflows-codefresh-csdp-versions-0.0.6-images-image-enricher-git-info:main
 
     steps:
       - name: Report GitHub Information to CSDP
-        run: node /app/src/index.js
+        run: |
+          if [[ github.event_name == 'pull_request' ]]; then
+            echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
+          else
+            echo "BRANCH=${{ github.head_ref }}" >> $GITHUB_ENV
+          fi
+          node /app/src/index.js
         working-directory: /app/
         env:
           IMAGE_SHA: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
