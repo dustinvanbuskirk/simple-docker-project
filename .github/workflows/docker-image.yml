@@ -58,7 +58,7 @@ jobs:
   
     runs-on: ubuntu-latest
     
-    needs: [build]
+    needs: [csdp-report-image-info]
   
     container:
       image: quay.io/codefreshplugins/argo-hub-workflows-codefresh-csdp-versions-0.0.6-images-image-enricher-jira-info:main
@@ -85,7 +85,7 @@ jobs:
   
     runs-on: ubuntu-latest
     
-    needs: [build]
+    needs: [csdp-report-image-info]
     
     if: ${{ github.event_name == 'pull_request' }}
   
