@@ -42,7 +42,7 @@ jobs:
           node /usr/src/app/index.js
         working-directory: /usr/src/app
         env:
-          IMAGE_URI: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
+          IMAGE_URI: docker.io/${{ github.repository }}:${{ github.sha }}
           CF_API_KEY: ${{ secrets.CF_RUNTIME_KEY }}
           GIT_BRANCH: ${{ github.ref_name }}
           GIT_REVISION: ${{ github.sha }}
@@ -74,7 +74,7 @@ jobs:
           node /app/src/index.js
         working-directory: /app/
         env:
-          IMAGE: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
+          IMAGE: docker.io/${{ github.repository }}:${{ github.sha }}
           CF_API_KEY: ${{ secrets.CF_PLATFORM_KEY }}
           JIRA_PROJECT_PREFIX: SA
           JIRA_HOST: codefresh-io.atlassian.net
@@ -93,11 +93,11 @@ jobs:
       image: quay.io/codefreshplugins/argo-hub-workflows-codefresh-csdp-versions-0.0.6-images-image-enricher-git-info:main
 
     steps:
-      - name: Report GitHub Information to CSDP
+      - name: Report GitHub Pull Request Information to CSDP
         run: node /app/src/index.js
         working-directory: /app/
         env:
-          IMAGE_SHA: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
+          IMAGE_SHA: docker.io/${{ github.repository }}:${{ github.sha }}
           CF_API_KEY: ${{ secrets.CF_PLATFORM_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
           BRANCH: ${{ github.head_ref }}
