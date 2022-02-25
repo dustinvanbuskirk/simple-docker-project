@@ -43,7 +43,7 @@ jobs:
         working-directory: /usr/src/app
         env:
           IMAGE_URI: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
-          CF_API_KEY: ${{ secrets.csdp_api_key }}
+          CF_API_KEY: ${{ secrets.CF_RUNTIME_KEY }}
           GIT_BRANCH: ${{ github.ref_name }}
           GIT_REVISION: ${{ github.sha }}
           GIT_COMMIT_MESSAGE: GitHub Actions have been here
@@ -75,7 +75,7 @@ jobs:
         working-directory: /app/
         env:
           IMAGE: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
-          CF_API_KEY: ${{ secrets.classic_api_key }}
+          CF_API_KEY: ${{ secrets.CF_PLATFORM_KEY }}
           JIRA_PROJECT_PREFIX: SA
           JIRA_HOST: codefresh-io.atlassian.net
           JIRA_EMAIL: dustin@codefresh.io
@@ -98,7 +98,7 @@ jobs:
         working-directory: /app/
         env:
           IMAGE_SHA: docker.io/dustinvanbuskirk/simple-docker-project:${{ github.sha }}
-          CF_API_KEY: ${{ secrets.classic_api_key }}
+          CF_API_KEY: ${{ secrets.CF_PLATFORM_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
           BRANCH: ${{ github.head_ref }}
           REPO: ${{ github.repository }}
